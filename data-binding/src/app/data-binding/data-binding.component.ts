@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+type NewType = {
+  event: Event;
+  novoValor: number;
+};
+
 @Component({
   selector: 'app-data-binding',
   templateUrl: './data-binding.component.html',
@@ -18,6 +23,8 @@ export class DataBindingComponent {
   isMouseOver: boolean = false;
 
   nomeDoCurso: string = 'Angular';
+
+  valorInicial: number = 15;
 
   getValor() {
     return 1;
@@ -41,5 +48,9 @@ export class DataBindingComponent {
 
   OnMouseOver() {
     this.isMouseOver = !this.isMouseOver;
+  }
+
+  onMudouValor(event: NewType) {
+    console.log(event.novoValor);
   }
 }
