@@ -66,6 +66,6 @@ export class CicloComponent
   }
 
   private log(hook: string) {
-    console.log(hook);
+    // console.log(hook);
   }
 }
