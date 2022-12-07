@@ -1,4 +1,21 @@
-<p>diretiva-ngclass works!</p>
 <h1>
-  <i class="bi bi-toggle-on"></i>
+  <i
+    class="bi"
+    [class.bi-star]="!meuFavorito"
+    [class.bi-star-fill]="meuFavorito"
+    (click)="onClick()"
+  ></i>
+</h1>
+
+<!--Usando ngClass-->
+<h1>
+  <i
+    class="bi"
+    [ngClass]="{
+      'bi-star': !meuFavorito,
+
+      'bi-star-fill': meuFavorito
+    }"
+    (click)="onClick()"
+  ></i>
 </h1>
