@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./exemplo-ngcontent.component.scss']
 })
 export class ExemploNgcontentComponent {
+  
 
 }
