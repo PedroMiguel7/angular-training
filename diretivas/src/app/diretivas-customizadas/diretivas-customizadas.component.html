@@ -7,5 +7,14 @@
 </p> -->
 
 <p appHighlight="red" [defaultColor]="'grey'">
-  Texto com highlight com cores costumizadas.
+  Texto com highlight com cores custumizadas.
 </p>
+
+<h5>Diretiva Estrutura customizada - ngElse</h5>
+
+<div *appNgElse="mostrarCursos">Lista de cursos aqui.</div>
+
+<div *appNgElse="!mostrarCursos">Não existem cursos para serem listados.</div>
+
+<br />
+<!-- <button appNgElse (click)="OnmostrarCursos()">{{ BrincksMinha }}cursos</button> -->
