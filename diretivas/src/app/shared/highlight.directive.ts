@@ -27,7 +27,7 @@ export class HighlightDirective {
   private backgroundColor: string | undefined;
 
   @Input() defaultColor = 'white';
-  @Input() highlightColor = 'yellow';
+  @Input('appHighlight') highlightColor = 'yellow';
 
   constructor() {}
 
