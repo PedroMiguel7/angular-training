@@ -1,17 +1,19 @@
-import { Directive } from '@angular/core';
+import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appNgElse]',
 })
 export class NgElseDirective {
-  cursos: string[] = ['Angular'];
-
-  mostrarCursos = false;
-
-  BrincksMinha = 'mostrar ';
-
-  OnmostrarCursos() {
-    this.mostrarCursos = !this.mostrarCursos;
-    this.BrincksMinha = this.mostrarCursos ? 'esconder ' : 'mostrar ';
+  @Input() set appNgElse(condition: boolean) {
+    if (!condition) {
+      this.ViewContainerRef.createEmbeddedView(this.TemplateRef);
+    } else {
+      this.ViewContainerRef.clear();
+    }
   }
+
+  constructor(
+    private TemplateRef: TemplateRef<any>,
+    private ViewContainerRef: ViewContainerRef
+  ) {}
 }

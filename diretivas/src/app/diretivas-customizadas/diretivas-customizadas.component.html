@@ -12,9 +12,22 @@
 
 <h5>Diretiva Estrutura customizada - ngElse</h5>
 
-<div *appNgElse="mostrarCursos">Lista de cursos aqui.</div>
+<div *ngIf="mostrarCursos; else naoMostrar">
+  Lista de cursos aqui:{{ cursos }}
+</div>
 
-<div *appNgElse="!mostrarCursos">Não existem cursos para serem listados.</div>
+<ng-template #naoMostrar>
+  <div>Não existem cursos para serem listados.</div>
+</ng-template>
 
 <br />
-<!-- <button appNgElse (click)="OnmostrarCursos()">{{ BrincksMinha }}cursos</button> -->
+<button (click)="OnmostrarCursos()">{{ BrincksMinha }}cursos</button>
+<br />
+
+<div *ngIf="mostrarCursos; else naoMostrar">
+  Lista de cursos aqui:{{ cursos }}
+</div>
+
+<ng-template #naoMostrar>
+  <div>Não existem cursos para serem listados.</div>
+</ng-template>
