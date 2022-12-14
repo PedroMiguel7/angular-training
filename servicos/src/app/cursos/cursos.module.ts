@@ -8,7 +8,7 @@ import { CursosComponent } from './cursos.component';
 @NgModule({
   declarations: [CursosComponent],
   imports: [BrowserModule, AppRoutingModule],
-  providers: [CursosService],
+  // providers: [CursosService],
   exports: [CursosComponent],
 })
 export class CursosModule {}
