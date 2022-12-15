@@ -6,6 +6,8 @@
 <p>Páginas: {{ livro?.numeroPaginas | number }}</p>
 <p>Preço: {{ livro?.preco | currency : "BRL" }}</p>
 <p>Data Lançamento: {{ livro?.dataLancamento | date : "dd-MMM-yyyy" }}</p>
-<p>Url: {{ livro?.url }}</p>
+<p>
+  Url: <a href="{{ livro?.url }}">{{ livro?.url }}</a>
+</p>
 <br />
 <p>Livro: {{ livro | json }}</p>
