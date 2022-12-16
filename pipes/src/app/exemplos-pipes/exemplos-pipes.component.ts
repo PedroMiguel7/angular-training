@@ -14,4 +14,12 @@ export class ExemplosPipesComponent {
     dataLancamento: new Date(2016, 5, 23),
     url: 'https://loiane.training/continuar-curso/angular',
   };
+
+  filtro: string = '';
+  livros: string[] = ['angular', 'Java'];
+
+  addCurso(valor: string) {
+    this.livros.push(valor);
+    console.log(this.livros);
+  }
 }
