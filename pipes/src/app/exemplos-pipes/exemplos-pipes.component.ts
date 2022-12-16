@@ -15,11 +15,28 @@ export class ExemplosPipesComponent {
     url: 'https://loiane.training/continuar-curso/angular',
   };
 
-  filtro: string = '';
   livros: string[] = ['angular', 'Java'];
+
+  filtroo: string = '';
 
   addCurso(valor: string) {
     this.livros.push(valor);
     console.log(this.livros);
+  }
+
+  obterCursos() {
+    if (
+      this.livros.length == 0 ||
+      this.filtroo === undefined ||
+      this.filtroo.trim() === ''
+    ) {
+      return this.livro;
+    }
+    return this.livros.filter((v) => {
+      if (v.toLowerCase().indexOf(this.filtroo.toLowerCase()) >= 0) {
+        return true;
+      }
+      return false;
+    });
   }
 }
