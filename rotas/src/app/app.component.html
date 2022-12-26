@@ -1,8 +1,12 @@
 <div class="corpo">
   <ul nz-menu>
-    <li nz-menu-item><a routerLink="">Home</a></li>
-    <li nz-menu-item><a routerLink="/login">Login</a></li>
-    <li nz-menu-item><a routerLink="/cursos">Cursos</a></li>
+    <li nz-menu-item routerLinkActive="active"><a routerLink="">Home</a></li>
+    <li nz-menu-item routerLinkActive="active">
+      <a routerLink="/login">Login</a>
+    </li>
+    <li nz-menu-item routerLinkActive="active">
+      <a routerLink="/cursos">Cursos</a>
+    </li>
   </ul>
   <router-outlet></router-outlet>
 </div>
