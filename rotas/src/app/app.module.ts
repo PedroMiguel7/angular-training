@@ -13,26 +13,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { CursosComponent } from './cursos/cursos.component';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 registerLocaleData(pt);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    CursosComponent
-  ],
+  declarations: [AppComponent, HomeComponent, LoginComponent, CursosComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NzMenuModule,
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: pt_BR }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: NZ_I18N, useValue: pt_BR }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
