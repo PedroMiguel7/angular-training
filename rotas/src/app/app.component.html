@@ -7,6 +7,13 @@
     <li nz-menu-item routerLinkActive="active">
       <a routerLink="/cursos">Cursos</a>
     </li>
+    <li nz-menu-item routerLinkActive="active">
+      <a [routerLink]="'/curso/' + idCurso.value">Curso com id</a>
+    </li>
   </ul>
-  <router-outlet></router-outlet>
+  <div>
+    <p>Entre com o id do curso</p>
+    <input type="text" #idCurso />
+    <router-outlet></router-outlet>
+  </div>
 </div>
