@@ -15,11 +15,18 @@ import { LoginComponent } from './login/login.component';
 import { CursosComponent } from './cursos/cursos.component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { CursoDetalheComponent } from './curso-detalhe/curso-detalhe.component';
+import { CursosService } from './cursos/cursos.service';
 
 registerLocaleData(pt);
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, CursosComponent, CursoDetalheComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    LoginComponent,
+    CursosComponent,
+    CursoDetalheComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,7 +35,7 @@ registerLocaleData(pt);
     BrowserAnimationsModule,
     NzMenuModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: pt_BR }],
+  providers: [{ provide: NZ_I18N, useValue: pt_BR }, CursosService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
