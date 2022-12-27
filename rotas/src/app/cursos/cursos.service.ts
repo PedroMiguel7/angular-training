@@ -7,8 +7,20 @@ export class CursosService {
   getCursos() {
     return [
       { id: 1, nome: 'Angular 2' },
-      { id: 2, nome: 'Javascript' },
+      { id: 2, nome: 'Java' }
     ];
+  }
+
+  getCurso(id: number): any {
+    let cursos = this.getCursos();
+    for (let i = 0; i < cursos.length; i++) {
+      let curso = cursos[i];
+      if (curso.id === id) {
+        return curso;
+      } else {
+        return null;
+      }
+    }
   }
 
   constructor() {}
