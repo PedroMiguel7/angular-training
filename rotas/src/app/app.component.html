@@ -1,16 +1,21 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" routerLink="" class="brand-logo right">Rotas Ng2</a>
+    <ul nz-menu class="left hide-on-med-and-down">
+      <li nz-menu-item routerLinkActive="active">
+        <a routerLink="/login">Login</a>
+      </li>
+      <li nz-menu-item routerLinkActive="active">
+        <a routerLink="/cursos">Cursos</a>
+      </li>
+      <li nz-menu-item routerLinkActive="active">
+        <a [routerLink]="'/curso/' + idCurso.value">Curso com id</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="corpo">
-  <ul nz-menu>
-    <li nz-menu-item routerLinkActive="active"><a routerLink="">Home</a></li>
-    <li nz-menu-item routerLinkActive="active">
-      <a routerLink="/login">Login</a>
-    </li>
-    <li nz-menu-item routerLinkActive="active">
-      <a routerLink="/cursos">Cursos</a>
-    </li>
-    <li nz-menu-item routerLinkActive="active">
-      <a [routerLink]="'/curso/' + idCurso.value">Curso com id</a>
-    </li>
-  </ul>
   <div>
     <p>Entre com o id do curso</p>
     <input type="text" #idCurso />
