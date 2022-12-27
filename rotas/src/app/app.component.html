@@ -6,7 +6,7 @@
         <a routerLink="/login">Login</a>
       </li>
       <li nz-menu-item routerLinkActive="active">
-        <a routerLink="/cursos">Cursos</a>
+        <a routerLink="/cursos" [queryParams]="{ pagina: 1 }">Cursos</a>
       </li>
       <li nz-menu-item routerLinkActive="active">
         <a [routerLink]="'/curso/' + idCurso.value">Curso com id</a>
