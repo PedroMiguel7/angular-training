@@ -8,8 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppRoutingModule } from './app-routing.module';
-import { CursosModule } from './cursos/cursos.module';
-import { AlunosModule } from './alunos/alunos.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -24,8 +22,6 @@ registerLocaleData(pt);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CursosModule,
-    AlunosModule,
     AppRoutingModule,
   ],
   // providers: [],
