@@ -4,13 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { TemplateFormComponent } from './template-form.component';
 
-
-
 @NgModule({
   declarations: [TemplateFormComponent],
-  imports: [
-  CommonModule,
-    FormsModule
-  ]
+  imports: [CommonModule, FormsModule],
 })
-export class TemplateFormModule { }
+export class TemplateFormModule {}
