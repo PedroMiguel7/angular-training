@@ -33,15 +33,43 @@ export class TemplateFormComponent implements OnInit {
     };
   }
 
-  consultaCEP(cep: any) {
+  consultaCEP(cep: any, form: any) {
+    Number(cep);
     if (cep != '') {
       var validacep = /^[0-9]{8}$/;
 
       if (validacep.test(cep)) {
+        this.resetDadosForm(form);
         this.http
           .get(`https://viacep.com.br/ws/${cep}/json`)
-          .subscribe((dados: any) => console.log(dados));
+          .subscribe((dados: any) => this.populaDadosForm(dados, form));
       }
     }
+  }
+
+  populaDadosForm(dados: any, formulario: any) {
+    formulario.form.patchValue({
+      endereco: {
+        cep: dados.cep,
+        complemento: dados.complemento,
+        rua: dados.logradouro,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf,
+      },
+    });
+  }
+
+  resetDadosForm(formulario: any) {
+    formulario.form.patchValue({
+      endereco: {
+        cep: null,
+        complemento: null,
+        rua: null,
+        bairro: null,
+        cidade: null,
+        estado: null,
+      },
+    });
   }
 }
