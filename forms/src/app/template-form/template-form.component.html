@@ -1,14 +1,19 @@
 <form #f="ngForm" (ngSubmit)="onSubmit(f)">
   <div class="mb-3">
     <div class="mb-3">
-      <label for="Nome" class="form-label">Nome</label>
+      <label for="nome" class="form-label">Nome</label>
       <input
         type="text"
         class="form-control"
-        name="name"
-        [(ngModel)]="usuario.name"
+        name="nome"
+        [(ngModel)]="usuario.nome"
         required
+        #nome="ngModel"
+        [class.is-invalid]="!nome.valid && nome.touched"
       />
+      <div *ngIf="!nome.valid && nome.touched">
+        <div class="alert alert-danger" role="alert">O nome é obrigatório</div>
+      </div>
     </div>
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input
@@ -19,10 +24,11 @@
       name="email"
       [(ngModel)]="usuario.email"
       required
-      email
+      #email="ngModel"
+      [class.is-invalid]="!email.valid && email.touched"
     />
-    <div id="emailHelp" class="form-text">
-      We'll never share your email with anyone else.
+    <div *ngIf="!email.valid && email.touched">
+      <div class="alert alert-danger" role="alert">O Email é obrigatório</div>
     </div>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>

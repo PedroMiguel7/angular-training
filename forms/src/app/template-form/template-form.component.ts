@@ -8,15 +8,15 @@ import { NgForm } from '@angular/forms';
 })
 export class TemplateFormComponent implements OnInit {
   usuario: any = {
-    // name: 'Pedro',
+    // nome: 'Pedro',
     // email: 'pedro@gmail.com',
-    name: null,
+    nome: null,
     email: null,
   };
 
   onSubmit(form: any) {
     console.log(form);
-    console.log(this.usuario);
+    // console.log(this.usuario);
   }
 
   constructor() {}
