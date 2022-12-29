@@ -10,11 +10,12 @@ import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 
 import { AlunosService } from './alunos.service';
 import { AlunosDeactivateGuard } from '../guards/alunos-deactivate.guard';
+import { AlunoDetalheResolver } from './guards/aluno-detalhe.resolver';
 
 @NgModule({
   declarations: [AlunosComponent, AlunoFormComponent, AlunoDetalheComponent],
   imports: [CommonModule, AlunosRoutingModule, FormsModule],
   exports: [],
-  providers: [AlunosService, AlunosDeactivateGuard],
+  providers: [AlunosService, AlunosDeactivateGuard, AlunoDetalheResolver],
 })
 export class AlunosModule {}
