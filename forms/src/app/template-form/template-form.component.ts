@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-template-form',
@@ -19,7 +19,7 @@ export class TemplateFormComponent implements OnInit {
     // console.log(this.usuario);
   }
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {}
 
@@ -31,5 +31,17 @@ export class TemplateFormComponent implements OnInit {
     return {
       'is-invalid': this.verificaValidTouched(campo),
     };
+  }
+
+  consultaCEP(cep: any) {
+    if (cep != '') {
+      var validacep = /^[0-9]{8}$/;
+
+      if (validacep.test(cep)) {
+        this.http
+          .get(`https://viacep.com.br/ws/${cep}/json`)
+          .subscribe((dados: any) => console.log(dados));
+      }
+    }
   }
 }

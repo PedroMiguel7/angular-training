@@ -36,111 +36,112 @@
   </div>
 
   <!-- <div ngModelGroup="endereco"> -->
-    <div class="col-md-3" ngModelGroup="endereco">
-      <label for="cep" class="form-label">CEP</label>
-      <input
-        type="number"
-        class="form-control"
-        id="cep"
-        name="cep"
-        ngModel
-        required
-        #cep="ngModel"
-        [ngClass]="aplicaCssErro(cep)"
-      />
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched(cep)"
-        mensagemErro="CEP obrigatório"
-      ></app-campo-control-erro>
-    </div>
+  <div class="col-md-3" ngModelGroup="endereco">
+    <label for="cep" class="form-label">CEP</label>
+    <input
+      type="number"
+      class="form-control"
+      id="cep"
+      name="cep"
+      ngModel
+      required
+      #cep="ngModel"
+      [ngClass]="aplicaCssErro(cep)"
+      (blur)="consultaCEP(cep.value)"
+    />
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched(cep)"
+      mensagemErro="CEP obrigatório"
+    ></app-campo-control-erro>
+  </div>
 
-    <div class="col-md-3" ngModelGroup="endereco">
-      <label for="numero" class="form-label">Numero</label>
-      <input
-        type="number"
-        class="form-control"
-        id="numero"
-        name="numero"
-        ngModel
-        required
-        #numero="ngModel"
-        [ngClass]="aplicaCssErro(numero)"
-      />
-      <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched(numero)"
-        mensagemErro="Numero obrigatório"
-      ></app-campo-control-erro>
-    </div>
+  <div class="col-md-3" ngModelGroup="endereco">
+    <label for="numero" class="form-label">Numero</label>
+    <input
+      type="number"
+      class="form-control"
+      id="numero"
+      name="numero"
+      ngModel
+      required
+      #numero="ngModel"
+      [ngClass]="aplicaCssErro(numero)"
+    />
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched(numero)"
+      mensagemErro="Numero obrigatório"
+    ></app-campo-control-erro>
+  </div>
 
-    <div class="col-md-6" ngModelGroup="endereco">
-      <label for="complemento" class="form-label">Complemento</label>
-      <input
-        type="complemento"
-        class="form-control"
-        id="complemento"
-        name="complemento"
-        ngModel
-      />
-    </div>
+  <div class="col-md-6" ngModelGroup="endereco">
+    <label for="complemento" class="form-label">Complemento</label>
+    <input
+      type="complemento"
+      class="form-control"
+      id="complemento"
+      name="complemento"
+      ngModel
+    />
+  </div>
 
-    <div class="mb-3" ngModelGroup="endereco">
-      <label for="rua" class="form-label">Rua</label>
-      <input
-        type="text"
-        class="form-control"
-        name="rua"
-        required
-        ngModel
-        #rua="ngModel"
-        readonly
-        [ngClass]="aplicaCssErro(rua)"
-      />
-    </div>
+  <div class="mb-3" ngModelGroup="endereco">
+    <label for="rua" class="form-label">Rua</label>
+    <input
+      type="text"
+      class="form-control"
+      name="rua"
+      required
+      ngModel
+      #rua="ngModel"
+      readonly
+      [ngClass]="aplicaCssErro(rua)"
+    />
+  </div>
 
-    <div class="col-md-5" ngModelGroup="endereco">
-      <label for="bairro" class="form-label">Bairro</label>
-      <input
-        type="text"
-        class="form-control"
-        id="bairro"
-        name="bairro"
-        ngModel
-        required
-        #bairro="ngModel"
-        [ngClass]="aplicaCssErro(bairro)"
-        readonly
-      />
-    </div>
+  <div class="col-md-5" ngModelGroup="endereco">
+    <label for="bairro" class="form-label">Bairro</label>
+    <input
+      type="text"
+      class="form-control"
+      id="bairro"
+      name="bairro"
+      ngModel
+      required
+      #bairro="ngModel"
+      [ngClass]="aplicaCssErro(bairro)"
+      readonly
+    />
+  </div>
 
-    <div class="col-md-4" ngModelGroup="endereco">
-      <label for="cidade" class="form-label">Cidade</label>
-      <input
-        type="text"
-        class="form-control"
-        id="cidade"
-        name="cidade"
-        ngModel
-        required
-        #cidade="ngModel"
-        [ngClass]="aplicaCssErro(cidade)"
-        readonly
-      />
-    </div>
+  <div class="col-md-4" ngModelGroup="endereco">
+    <label for="cidade" class="form-label">Cidade</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cidade"
+      name="cidade"
+      ngModel
+      required
+      #cidade="ngModel"
+      [ngClass]="aplicaCssErro(cidade)"
+      readonly
+    />
+  </div>
 
-    <div class="col-md-3" ngModelGroup="endereco">
-      <label for="estado" class="form-label">Estado</label>
-      <input
-        type="text"
-        class="form-control"
-        id="estado"
-        name="estado"
-        ngModel
-        required
-        #estado="ngModel"
-        [ngClass]="aplicaCssErro(estado)"
-        readonly
-      />
-    </div>
+  <div class="col-md-3" ngModelGroup="endereco">
+    <label for="estado" class="form-label">Estado</label>
+    <input
+      type="text"
+      class="form-control"
+      id="estado"
+      name="estado"
+      ngModel
+      required
+      #estado="ngModel"
+      [ngClass]="aplicaCssErro(estado)"
+      readonly
+    />
+  </div>
   <!-- </div> -->
 
   <button type="submit" class="btn btn-primary col-md-1" [disabled]="!f.valid">
