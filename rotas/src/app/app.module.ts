@@ -15,6 +15,7 @@ import { AuthService } from './login/auth.service';
 
 import { AuthGuard } from './guards/auth.guard';
 import { CursosGuard } from './guards/cursos.guard';
+import { AlunosGuard } from './guards/alunos.guard';
 
 registerLocaleData(pt);
 
@@ -27,7 +28,7 @@ registerLocaleData(pt);
     BrowserAnimationsModule,
     AppRoutingModule,
   ],
-  providers: [AuthService, AuthGuard, CursosGuard],
+  providers: [AuthService, AuthGuard, CursosGuard, AlunosGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
