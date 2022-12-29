@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="row g-3">
   <div class="mb-3">
     <div class="mb-3">
       <label for="nome" class="form-label">Nome</label>
@@ -32,7 +32,112 @@
       <div class="alert alert-danger" role="alert">Email inválido</div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
+
+  <div class="col-md-3">
+    <label for="cep" class="form-label">CEP</label>
+    <input
+      type="number"
+      class="form-control"
+      id="cep"
+      name="cep"
+      ngModel
+      required
+      #cep="ngModel"
+      [class.is-invalid]="!cep.valid && cep.touched"
+    />
+    <div *ngIf="!cep.valid && cep.touched">
+      <div class="alert alert-danger" role="alert">CEP obrigatório</div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <label for="numero" class="form-label">Numero</label>
+    <input
+      type="number"
+      class="form-control"
+      id="numero"
+      name="numero"
+      ngModel
+      required
+      #numero="ngModel"
+      [class.is-invalid]="!numero.valid && numero.touched"
+    />
+    <div *ngIf="!numero.valid && numero.touched">
+      <div class="alert alert-danger" role="alert">Numero obrigatório</div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <label for="complemento" class="form-label">Complemento</label>
+    <input
+      type="complemento"
+      class="form-control"
+      id="complemento"
+      name="complemento"
+      ngModel
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="rua" class="form-label">Rua</label>
+    <input
+      type="text"
+      class="form-control"
+      name="rua"
+      required
+      ngModel
+      #rua="ngModel"
+      readonly
+      [class.is-invalid]="!rua.valid && rua.touched"
+    />
+  </div>
+
+  <div class="col-md-5">
+    <label for="bairro" class="form-label">Bairro</label>
+    <input
+      type="text"
+      class="form-control"
+      id="bairro"
+      name="bairro"
+      ngModel
+      required
+      #bairro="ngModel"
+      [class.is-invalid]="!bairro.valid && bairro.touched"
+      readonly
+    />
+  </div>
+
+  <div class="col-md-4">
+    <label for="cidade" class="form-label">Cidade</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cidade"
+      name="cidade"
+      ngModel
+      required
+      #cidade="ngModel"
+      [class.is-invalid]="!cidade.valid && cidade.touched"
+      readonly
+    />
+  </div>
+
+  <div class="col-md-3">
+    <label for="estado" class="form-label">Estado</label>
+    <input
+      type="text"
+      class="form-control"
+      id="estado"
+      name="estado"
+      ngModel
+      required
+      #estado="ngModel"
+      [class.is-invalid]="!estado.valid && estado.touched"
+      readonly
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary col-md-1" [disabled]="!f.valid">
     Submit
   </button>
 
