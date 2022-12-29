@@ -52,7 +52,7 @@ export class AlunoFormComponent implements OnInit {
     return true;
   }
 
-  podeDesativar() {
-    return this.podeMudarRota();
-  }
+  // podeDesativar() {
+  //   return this.podeMudarRota();
+  // }
 }
