@@ -28,8 +28,10 @@
       [class.is-invalid]="!email.valid && email.touched"
     />
     <div *ngIf="!email.valid && email.touched">
-      <div class="alert alert-danger" role="alert">O Email é obrigatório</div>
+      <div class="alert alert-danger" role="alert">Email inválido</div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
+    Submit
+  </button>
 </form>
