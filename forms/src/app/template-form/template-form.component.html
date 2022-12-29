@@ -9,11 +9,12 @@
         [(ngModel)]="usuario.nome"
         required
         #nome="ngModel"
-        [class.is-invalid]="!nome.valid && nome.touched"
+        [ngClass]="aplicaCssErro(nome)"
       />
-      <div *ngIf="!nome.valid && nome.touched">
-        <div class="alert alert-danger" role="alert">O nome é obrigatório</div>
-      </div>
+      <app-campo-control-erro
+        [mostrarErro]="verificaValidTouched(nome)"
+        mensagemErro="O nome é obrigatório"
+      ></app-campo-control-erro>
     </div>
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input
@@ -26,11 +27,12 @@
       required
       email
       #email="ngModel"
-      [class.is-invalid]="!email.valid && email.touched"
+      [ngClass]="aplicaCssErro(email)"
     />
-    <div *ngIf="!email.valid && email.touched">
-      <div class="alert alert-danger" role="alert">Email inválido</div>
-    </div>
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched(email)"
+      mensagemErro="Email inválido"
+    ></app-campo-control-erro>
   </div>
 
   <div class="col-md-3">
@@ -43,11 +45,12 @@
       ngModel
       required
       #cep="ngModel"
-      [class.is-invalid]="!cep.valid && cep.touched"
+      [ngClass]="aplicaCssErro(cep)"
     />
-    <div *ngIf="!cep.valid && cep.touched">
-      <div class="alert alert-danger" role="alert">CEP obrigatório</div>
-    </div>
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched(cep)"
+      mensagemErro="CEP obrigatório"
+    ></app-campo-control-erro>
   </div>
 
   <div class="col-md-3">
@@ -60,11 +63,12 @@
       ngModel
       required
       #numero="ngModel"
-      [class.is-invalid]="!numero.valid && numero.touched"
+      [ngClass]="aplicaCssErro(numero)"
     />
-    <div *ngIf="!numero.valid && numero.touched">
-      <div class="alert alert-danger" role="alert">Numero obrigatório</div>
-    </div>
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched(numero)"
+      mensagemErro="Numero obrigatório"
+    ></app-campo-control-erro>
   </div>
 
   <div class="col-md-6">
@@ -88,7 +92,7 @@
       ngModel
       #rua="ngModel"
       readonly
-      [class.is-invalid]="!rua.valid && rua.touched"
+      [ngClass]="aplicaCssErro(rua)"
     />
   </div>
 
@@ -102,7 +106,7 @@
       ngModel
       required
       #bairro="ngModel"
-      [class.is-invalid]="!bairro.valid && bairro.touched"
+      [ngClass]="aplicaCssErro(bairro)"
       readonly
     />
   </div>
@@ -117,7 +121,7 @@
       ngModel
       required
       #cidade="ngModel"
-      [class.is-invalid]="!cidade.valid && cidade.touched"
+      [ngClass]="aplicaCssErro(cidade)"
       readonly
     />
   </div>
@@ -132,7 +136,7 @@
       ngModel
       required
       #estado="ngModel"
-      [class.is-invalid]="!estado.valid && estado.touched"
+      [ngClass]="aplicaCssErro(estado)"
       readonly
     />
   </div>
