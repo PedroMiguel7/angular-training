@@ -34,6 +34,89 @@
     ></app-campo-control-erro>
   </div>
 
+  <div class="col-md-3">
+    <label for="cep" class="form-label">CEP</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cep"
+      formControlName="cep"
+      [ngClass]="aplicaCssErro('cep')"
+    />
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched('cep')"
+      mensagemErro="CEP obrigatório"
+    ></app-campo-control-erro>
+  </div>
+
+  <div class="col-md-3">
+    <label for="numero" class="form-label">Numero</label>
+    <input
+      type="number"
+      class="form-control"
+      id="numero"
+      formControlName="numero"
+      [ngClass]="aplicaCssErro('numero')"
+    />
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched('numero')"
+      mensagemErro="Numero obrigatório"
+    ></app-campo-control-erro>
+  </div>
+
+  <div class="col-md-6">
+    <label for="complemento" class="form-label">Complemento</label>
+    <input
+      type="complemento"
+      class="form-control"
+      id="complemento"
+      formControlName="complemento"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="rua" class="form-label">Rua</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="rua"
+      [ngClass]="aplicaCssErro('rua')"
+    />
+  </div>
+
+  <div class="col-md-5">
+    <label for="bairro" class="form-label">Bairro</label>
+    <input
+      type="text"
+      class="form-control"
+      id="bairro"
+      formControlName="bairro"
+      [ngClass]="aplicaCssErro('bairro')"
+    />
+  </div>
+
+  <div class="col-md-4">
+    <label for="cidade" class="form-label">Cidade</label>
+    <input
+      type="text"
+      class="form-control"
+      id="cidade"
+      formControlName="cidade"
+      [ngClass]="aplicaCssErro('cidade')"
+    />
+  </div>
+
+  <div class="col-md-3">
+    <label for="estado" class="form-label">Estado</label>
+    <input
+      type="text"
+      class="form-control"
+      id="estado"
+      formControlName="estado"
+      [ngClass]="aplicaCssErro('estado')"
+    />
+  </div>
+
   <button type="submit" class="btn btn-primary col-md-1">Submit</button>
   <button type="button" class="btn btn-secondary col-md-1" (click)="resetar()">
     Cancelar
