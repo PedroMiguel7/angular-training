@@ -20,6 +20,7 @@ export class DataFormComponent implements OnInit {
   formulario!: FormGroup;
   estados: EstadoBr[] = [];
   // estados!: Observable<EstadoBr[]>;
+  cargos: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +49,7 @@ export class DataFormComponent implements OnInit {
         cidade: [null, Validators.required],
         estado: [null, Validators.required],
       }),
+      cargo: [null],
     });
 
     this.dropDownService.getEstadosBr().subscribe((res: any) => {
@@ -55,20 +57,16 @@ export class DataFormComponent implements OnInit {
         this.estados.push(dados);
       });
     });
-    console.log(this.estados);
+
+    this.cargos = this.dropDownService?.getCargos();
   }
 
   onSubmit() {
-    console.log(this.formulario);
-    // console.log(this.usuario);
-
     if (this.formulario.valid) {
       this.http
         .post('http://httpbin.org/post', JSON.stringify(this.formulario.value))
         .subscribe(
           (res) => {
-            console.log(res);
-            //reseta o form
             this.resetar();
           },
           (error: any) => alert('erro')
@@ -147,5 +145,19 @@ export class DataFormComponent implements OnInit {
     });
 
     this.formulario.get('nome')?.setValue('Pedro');
+  }
+
+  setarCargo() {
+    const cargo = { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl' };
+    this.formulario.get('cargo')?.setValue(cargo);
+  }
+
+  compararCargos(
+    obj1: { nome: any; nivel: any },
+    obj2: { nome: any; nivel: any }
+  ) {
+    return obj1 && obj2
+      ? obj1.nome === obj2.nome && obj1.nivel === obj2.nivel
+      : obj1 === obj2;
   }
 }
