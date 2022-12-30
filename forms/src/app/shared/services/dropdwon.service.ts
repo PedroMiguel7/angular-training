@@ -20,4 +20,13 @@ export class DropdwonService {
       { nome: 'Dev', nivel: 'Senior', desc: 'Dev Sr' },
     ];
   }
+
+  getTecnologias() {
+    return [
+      { nome: 'java', desc: 'java' },
+      { nome: 'javascript', desc: 'javascript' },
+      { nome: 'php', desc: 'php' },
+      { nome: 'ruby', desc: 'ruby' },
+    ];
+  }
 }
