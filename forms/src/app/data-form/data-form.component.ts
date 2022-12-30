@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -8,7 +9,7 @@ import {
 } from '@angular/forms';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdwonService } from '../shared/services/dropdwon.service';
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 
 @Component({
@@ -23,6 +24,8 @@ export class DataFormComponent implements OnInit {
   cargos: any[] = [];
   tecnologias: any[] = [];
   newsletterOp: any[] = [];
+
+  frameworks = ['Angular', 'React', 'Vue', 'Sencha'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,6 +58,7 @@ export class DataFormComponent implements OnInit {
       tecnologias: [null],
       newsLetter: ['s'],
       termos: [null, Validators.pattern('true')],
+      frameworks: this.buildFrameworks(),
     });
 
     this.dropDownService.getEstadosBr().subscribe((res: any) => {
@@ -68,10 +72,24 @@ export class DataFormComponent implements OnInit {
     this.newsletterOp = this.dropDownService?.getNewslettter();
   }
 
+  buildFrameworks() {
+    const values = this.frameworks.map((v) => new FormControl(false));
+
+    return this.formBuilder.array(values);
+  }
+
   onSubmit() {
+    let valueSubmit = Object.assign({}, this.formulario.value);
+
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+        .map((v: any, i: number) => (v ? this.frameworks[i] : null))
+        .filter((v: any) => v !== null),
+    });
+
     if (this.formulario.valid) {
       this.http
-        .post('http://httpbin.org/post', JSON.stringify(this.formulario.value))
+        .post('http://httpbin.org/post', JSON.stringify(valueSubmit))
         .subscribe(
           (res) => {
             this.resetar();
@@ -170,5 +188,11 @@ export class DataFormComponent implements OnInit {
 
   setarTecnologias() {
     this.formulario.get('tecnologias')?.setValue(['java', 'php', 'javascript']);
+  }
+
+  getFrameworksControls() {
+    return this.formulario.get('frameworks')
+      ? (<FormArray>this.formulario.get('frameworks')).controls
+      : null;
   }
 }

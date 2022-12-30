@@ -190,6 +190,22 @@
   </div>
 
   <div>
+    <div
+      class="checkbox"
+      class="col-sm-4"
+      formArrayName="frameworks"
+      *ngFor="let item of getFrameworksControls(); let i = index"
+    >
+      <label class="checkbox-inline">
+        <input type="checkbox" [formControlName]="i" /> {{ frameworks[i] }}
+      </label>
+      <!-- <app-campo-control-erro [mostrarErro]="!formulario.get('frameworks')?.valid"
+            [msgErro]="'Por favor, aceite os termos'">
+            </app-campo-control-erro><br> -->
+    </div>
+  </div>
+
+  <div>
     <button type="submit" class="btn btn-primary col-md-2">Submit</button>
     <button
       type="button"
