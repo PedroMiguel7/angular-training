@@ -13,8 +13,8 @@ import { DataFormComponent } from './data-form.component';
     CommonModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
   ],
 })
 export class DataFormModule {}
