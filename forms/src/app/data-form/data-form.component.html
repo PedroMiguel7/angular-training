@@ -32,6 +32,20 @@
       [mostrarErro]="verificaEmailInvalido()"
       mensagemErro="Email inválido"
     ></app-campo-control-erro>
+    <label for="exampleInputEmail1" class="form-label">Confirmar email</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      formControlName="confirmarEmail"
+      [ngClass]="aplicaCssErro('confirmarEmail')"
+    />
+    <app-campo-control-erro
+      [mostrarErro]="!!formulario.get('confirmarEmail')?.hasError('equalsTo')"
+      msgErro="Por favor, confirme o e-mail digitando-o novamente"
+    >
+    </app-campo-control-erro>
   </div>
 
   <div class="col-md-3" formGroupName="endereco">
