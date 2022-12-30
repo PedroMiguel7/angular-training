@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdwonService } from '../shared/services/dropdwon.service';
+import { map } from 'rxjs';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 
 @Component({
   selector: 'app-data-form',
@@ -16,12 +18,13 @@ import { DropdwonService } from '../shared/services/dropdwon.service';
 })
 export class DataFormComponent implements OnInit {
   formulario!: FormGroup;
-  estados!: EstadoBr[];
+  estados: EstadoBr[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private dropDownService: DropdwonService
+    private dropDownService: DropdwonService,
+    private cepService: ConsultaCepService
   ) {}
 
   ngOnInit(): void {
@@ -50,10 +53,13 @@ export class DataFormComponent implements OnInit {
         estado: [null, Validators.required],
       }),
     });
-
+    this.estados;
     this.dropDownService.getEstadosBr().subscribe((res: any) => {
-      this.estados.push(res);
+      res.map((dados: any) => {
+        this.estados.push(dados);
+      });
     });
+    console.log(this.estados);
   }
 
   onSubmit() {
@@ -113,23 +119,14 @@ export class DataFormComponent implements OnInit {
   consultaCEP() {
     let cep = this.formulario.get('endereco.cep')?.value;
 
-    Number(cep);
-    if (cep != '') {
-      var validacep = /^[0-9]{8}$/;
-
-      if (validacep.test(cep)) {
-        this.resetDadosForm(this.formulario);
-        this.http
-          .get(`https://viacep.com.br/ws/${cep}/json`)
-          .subscribe((dados: any) =>
-            this.populaDadosForm(dados, this.formulario)
-          );
-      }
-    }
+    this.cepService.consultaCEP(cep)?.subscribe((dados: any) => {
+      this.resetDadosForm();
+      this.populaDadosForm(dados, this.formulario);
+    });
   }
 
-  resetDadosForm(formulario: any) {
-    formulario.patchValue({
+  resetDadosForm() {
+    this.formulario.patchValue({
       endereco: {
         cep: null,
         complemento: null,
