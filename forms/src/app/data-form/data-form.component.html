@@ -149,6 +149,28 @@
     </select>
   </div>
 
+  <div class="col-md-3">
+    <label for="newsLetter" class="form-label">newsLetter</label>
+    <div>
+      <div
+        class="form-check form-check-inline"
+        *ngFor="let item of newsletterOp"
+      >
+        <input
+          class="form-check-input"
+          type="radio"
+          name="item.valor"
+          id="item.valor"
+          formControlName="newsLetter"
+          [value]="item.valor"
+        />
+        <label class="form-check-label" [for]="item.valor">
+          {{ item.desc }}
+        </label>
+      </div>
+    </div>
+  </div>
+
   <div>
     <button type="submit" class="btn btn-primary col-md-2">Submit</button>
     <button

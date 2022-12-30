@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +26,13 @@ export class DropdwonService {
       { nome: 'javascript', desc: 'javascript' },
       { nome: 'php', desc: 'php' },
       { nome: 'ruby', desc: 'ruby' },
+    ];
+  }
+
+  getNewslettter() {
+    return [
+      { valor: 's', desc: 'Sim' },
+      { valor: 'n', desc: 'Não' },
     ];
   }
 }
