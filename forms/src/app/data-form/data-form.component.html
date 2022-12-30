@@ -1,1 +1,30 @@
-<p>data-form works!</p>
+<form class="row g-3" [formGroup]="formulario">
+  <div class="mb-3">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome</label>
+      <input type="text" class="form-control" formControlName="nome" required />
+      <!-- <app-campo-control-erro
+        [mostrarErro]="verificaValidTouched(nome)"
+        mensagemErro="O nome é obrigatório"
+      ></app-campo-control-erro> -->
+    </div>
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="exampleInputEmail1"
+      aria-describedby="emailHelp"
+      formControlName="email"
+      required
+      email
+    />
+    <!-- <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched(email)"
+      mensagemErro="Email inválido"
+    ></app-campo-control-erro> -->
+  </div>
+
+  <button type="submit" class="btn btn-primary col-md-1">Submit</button>
+
+  <app-form-debug [form]="formulario"></app-form-debug>
+</form>
