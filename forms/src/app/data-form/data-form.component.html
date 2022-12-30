@@ -2,11 +2,18 @@
   <div class="mb-3">
     <div class="mb-3">
       <label for="nome" class="form-label">Nome</label>
-      <input type="text" class="form-control" formControlName="nome" />
-      <!-- <app-campo-control-erro
-        [mostrarErro]="verificaValidTouched(nome)"
+      <input
+        type="text"
+        class="form-control"
+        formControlName="nome"
+        [ngClass]="aplicaCssErro('nome')"
+      />
+      <app-campo-control-erro
+        [mostrarErro]="
+          !formulario.controls['nome'].valid && formulario.get('nome')?.touched
+        "
         mensagemErro="O nome é obrigatório"
-      ></app-campo-control-erro> -->
+      ></app-campo-control-erro>
     </div>
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input
@@ -15,11 +22,16 @@
       id="exampleInputEmail1"
       aria-describedby="emailHelp"
       formControlName="email"
+      [ngClass]="aplicaCssErro('email')"
     />
-    <!-- <app-campo-control-erro
-      [mostrarErro]="verificaValidTouched(email)"
+    <app-campo-control-erro
+      [mostrarErro]="verificaValidTouched('email')"
+      mensagemErro="Email é obrigatório"
+    ></app-campo-control-erro>
+    <app-campo-control-erro
+      [mostrarErro]="verificaEmailInvalido()"
       mensagemErro="Email inválido"
-    ></app-campo-control-erro> -->
+    ></app-campo-control-erro>
   </div>
 
   <button type="submit" class="btn btn-primary col-md-1">Submit</button>
