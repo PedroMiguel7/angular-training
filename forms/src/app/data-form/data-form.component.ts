@@ -33,13 +33,15 @@ export class DataFormComponent implements OnInit {
         ],
       ],
       email: [null, [Validators.required, Validators.email]],
-      cep: [null, [Validators.required]],
-      numero: [null, Validators.required],
-      complemento: [null],
-      rua: [null, Validators.required],
-      bairro: [null, Validators.required],
-      cidade: [null, Validators.required],
-      estado: [null, Validators.required],
+      endereco: this.formBuilder.group({
+        cep: [null, [Validators.required]],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required],
+      }),
     });
   }
 
@@ -76,9 +78,9 @@ export class DataFormComponent implements OnInit {
   }
 
   verificaEmailInvalido() {
-    let campoEmail = this.formulario.get('email');
+    let campoEmail = this.formulario.get('endereco.email');
     if (campoEmail?.errors) {
-      return campoEmail.errors['email'] && campoEmail.touched;
+      return campoEmail.errors['endereco.email'] && campoEmail.touched;
     }
   }
 }
