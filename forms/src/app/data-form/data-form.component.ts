@@ -54,6 +54,7 @@ export class DataFormComponent implements OnInit {
       cargo: [null],
       tecnologias: [null],
       newsLetter: ['s'],
+      termos: [null, Validators.pattern('true')],
     });
 
     this.dropDownService.getEstadosBr().subscribe((res: any) => {
