@@ -109,13 +109,16 @@
 
   <div class="col-md-3" formGroupName="endereco">
     <label for="estado" class="form-label">Estado</label>
-    <input
-      type="text"
-      class="form-control"
+    <select
+      class="form-control form-select"
       id="estado"
       formControlName="estado"
       [ngClass]="aplicaCssErro('endereco.estado')"
-    />
+    >
+      <option *ngFor="let estado of estados" value="{{ estado.sigla }}">
+        {{ estado.nome }}
+      </option>
+    </select>
   </div>
 
   <button type="submit" class="btn btn-primary col-md-1">Submit</button>

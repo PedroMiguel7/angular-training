@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdwonService } from '../shared/services/dropdwon.service';
-import { map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 
 @Component({
@@ -19,6 +19,7 @@ import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 export class DataFormComponent implements OnInit {
   formulario!: FormGroup;
   estados: EstadoBr[] = [];
+  // estados!: Observable<EstadoBr[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,11 +29,6 @@ export class DataFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.formulario = new FormGroup({
-    //   nome: new FormControl(null),
-    //   email: new FormControl(null),
-    // });
-
     this.formulario = this.formBuilder.group({
       nome: [
         null,
@@ -53,7 +49,7 @@ export class DataFormComponent implements OnInit {
         estado: [null, Validators.required],
       }),
     });
-    this.estados;
+
     this.dropDownService.getEstadosBr().subscribe((res: any) => {
       res.map((dados: any) => {
         this.estados.push(dados);
