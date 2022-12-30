@@ -12,7 +12,7 @@ import { EstadoBr } from '../shared/models/estado-br';
 import { DropdwonService } from '../shared/services/dropdwon.service';
 // import { Observable } from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
-import { FormValidations } from '../shared/services/form-validations';
+import { FormValidations } from '../shared/form-validations';
 
 @Component({
   selector: 'app-data-form',
@@ -48,7 +48,7 @@ export class DataFormComponent implements OnInit {
       ],
       email: [null, [Validators.required, Validators.email]],
       endereco: this.formBuilder.group({
-        cep: [null, [Validators.required]],
+        cep: [null, [Validators.required, Validators.pattern(/^[0-9]{8}$/)]],
         numero: [null, Validators.required],
         complemento: [null],
         rua: [null, Validators.required],
@@ -144,7 +144,6 @@ export class DataFormComponent implements OnInit {
     let cep = this.formulario.get('endereco.cep')?.value;
 
     this.cepService.consultaCEP(cep)?.subscribe((dados: any) => {
-      this.resetDadosForm();
       this.populaDadosForm(dados, this.formulario);
     });
   }
@@ -165,7 +164,7 @@ export class DataFormComponent implements OnInit {
   populaDadosForm(dados: any, formulario: any) {
     formulario.patchValue({
       endereco: {
-        cep: dados.cep,
+        // cep: formulario.cep,
         complemento: dados.complemento,
         rua: dados.logradouro,
         bairro: dados.bairro,
