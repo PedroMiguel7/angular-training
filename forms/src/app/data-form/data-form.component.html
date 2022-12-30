@@ -190,6 +190,7 @@
   </div>
 
   <div>
+    <label for="">Frameworks</label>
     <div
       class="checkbox"
       class="col-sm-4"
@@ -199,9 +200,11 @@
       <label class="checkbox-inline">
         <input type="checkbox" [formControlName]="i" /> {{ frameworks[i] }}
       </label>
-      <!-- <app-campo-control-erro [mostrarErro]="!formulario.get('frameworks')?.valid"
-            [msgErro]="'Por favor, aceite os termos'">
-            </app-campo-control-erro><br> -->
+      <app-campo-control-erro
+        [mostrarErro]="!formulario.get('frameworks')?.valid"
+        msgErro="Por favor, selecione uma opção"
+      >
+      </app-campo-control-erro>
     </div>
   </div>
 
