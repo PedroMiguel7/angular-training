@@ -13,15 +13,20 @@ export class CursosListaComponent implements OnInit {
   // cursos?: Curso[];
 
   cursos$?: Observable<Curso[]>;
-  error$?: any = Subject<Boolean>;
+  error$?: any = new Subject<Boolean>();
 
   constructor(private service: CursosService) {}
 
   ngOnInit() {
     // this.service.list().subscribe((dados: Curso[]) => (this.cursos = dados));
+    this.onRefresh();
+  }
+
+  onRefresh() {
     this.cursos$ = this.service.list().pipe(
       catchError((error: any) => {
         console.log(error);
+        this.error$.next(true);
         return empty();
       })
     );
