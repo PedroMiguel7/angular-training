@@ -11,9 +11,8 @@ describe('CursosListaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CursosListaComponent ]
-    })
-    .compileComponents();
+      declarations: [CursosListaComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
