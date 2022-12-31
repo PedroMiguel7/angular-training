@@ -10,7 +10,14 @@ import {
 } from '@angular/forms';
 import { EstadoBr } from '../shared/models/estado-br';
 import { DropdwonService } from '../shared/services/dropdwon.service';
-import { Observable, map } from 'rxjs';
+import {
+  Observable,
+  map,
+  distinctUntilChanged,
+  switchMap,
+  EMPTY,
+  empty,
+} from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { FormValidations } from '../shared/form-validations';
 import { VerificaEmailService } from './services/verifica-email.service';
@@ -42,6 +49,9 @@ export class DataFormComponent implements OnInit {
     // this.verificaEmailService
     //   .verificarEmail('email@email.com')
     //   .subscribe((data: any) => console.log(data));
+    this.cargos = this.dropDownService?.getCargos();
+    this.tecnologias = this.dropDownService?.getTecnologias();
+    this.newsletterOp = this.dropDownService?.getNewslettter();
 
     this.formulario = this.formBuilder.group({
       nome: [
@@ -87,9 +97,21 @@ export class DataFormComponent implements OnInit {
       });
     });
 
-    this.cargos = this.dropDownService?.getCargos();
-    this.tecnologias = this.dropDownService?.getTecnologias();
-    this.newsletterOp = this.dropDownService?.getNewslettter();
+    this.formulario
+      .get('endereco.cep')
+      ?.statusChanges.pipe(
+        distinctUntilChanged(),
+        switchMap((status) =>
+          status === 'VALID'
+            ? this.cepService.consultaCEP(
+                this.formulario.get('endereco.cep')?.value
+              )
+            : empty()
+        )
+      )
+      .subscribe((dados) =>
+        dados ? this.populaDadosForm(dados, this.formulario) : {}
+      );
   }
 
   buildFrameworks() {
@@ -158,13 +180,9 @@ export class DataFormComponent implements OnInit {
     }
   }
 
-  consultaCEP() {
-    let cep = this.formulario.get('endereco.cep')?.value;
-
-    this.cepService.consultaCEP(cep)?.subscribe((dados: any) => {
-      this.populaDadosForm(dados, this.formulario);
-    });
-  }
+  // consultaCEP() {
+  //   let cep = this.formulario.get('endereco.cep')?.value;
+  // }
 
   resetDadosForm() {
     this.formulario.patchValue({
