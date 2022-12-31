@@ -9,7 +9,7 @@ export class DropdwonService {
   constructor(private http: HttpClient) {}
 
   getEstadosBr() {
-    return this.http.get('../../../assets/estadosBr.json').pipe();
+    return this.http.get('../../../assets/dados/estadosBr.json').pipe();
   }
 
   getCargos() {
