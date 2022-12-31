@@ -8,12 +8,10 @@
         formControlName="nome"
         [ngClass]="aplicaCssErro('nome')"
       />
-      <app-campo-control-erro
-        [mostrarErro]="
-          !formulario.controls['nome'].valid && formulario.get('nome')?.touched
-        "
-        mensagemErro="O nome é obrigatório"
-      ></app-campo-control-erro>
+      <app-error-msg
+        [control]="formulario.get('nome')"
+        label='Nome'
+      ></app-error-msg>
     </div>
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input
