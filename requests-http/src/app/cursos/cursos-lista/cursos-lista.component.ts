@@ -10,7 +10,7 @@ import { CursosService } from '../cursos.service';
   preserveWhitespaces: true,
 })
 export class CursosListaComponent implements OnInit {
-  cursos?: Curso[];
+  // cursos?: Curso[];
 
   cursos$?: Observable<Curso[]>;
 
