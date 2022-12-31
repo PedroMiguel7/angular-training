@@ -129,13 +129,16 @@
 
   <div class="col-md-4" formGroupName="endereco">
     <label for="cidade" class="form-label">Cidade</label>
-    <input
-      type="text"
-      class="form-control"
+    <select
+      class="form-control form-select"
       id="cidade"
       formControlName="cidade"
       [ngClass]="aplicaCssErro('endereco.cidade')"
-    />
+    >
+      <option *ngFor="let cidade of cidades" value="{{ cidade.nome }}">
+        {{ cidade.nome }}
+      </option>
+    </select>
   </div>
 
   <div class="col-md-3" formGroupName="endereco">

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
+import { EstadoBr } from './../models/estado-br';
+import { CidadeBR } from '../models/cidade-br ';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +12,9 @@ export class DropdwonService {
   constructor(private http: HttpClient) {}
 
   getEstadosBr() {
-    return this.http.get('../../../assets/dados/estadosBr.json').pipe();
+    return this.http
+      .get<EstadoBr>('../../../assets/dados/estadosBr.json')
+      .pipe();
   }
 
   getCargos() {
@@ -34,5 +39,15 @@ export class DropdwonService {
       { valor: 's', desc: 'Sim' },
       { valor: 'n', desc: 'Não' },
     ];
+  }
+
+  getCidades(idEstado: number) {
+    return this.http
+      .get<CidadeBR[]>('../../../assets/dados/cidades.json')
+      .pipe(
+        map((cidades: CidadeBR[]) =>
+          cidades.filter((c: any) => c.estado == idEstado)
+        )
+      );
   }
 }

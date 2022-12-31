@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -10,19 +9,19 @@ import {
 } from '@angular/forms';
 
 import { EstadoBr } from '../shared/models/estado-br';
-import { DropdwonService } from '../shared/services/dropdwon.service';
 import {
-  Observable,
   map,
   distinctUntilChanged,
   switchMap,
-  EMPTY,
   empty,
+  tap,
 } from 'rxjs';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { FormValidations } from '../shared/form-validations';
 import { VerificaEmailService } from './services/verifica-email.service';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { DropdwonService } from './../shared/services/dropdwon.service';
+import { CidadeBR } from './../shared/models/cidade-br ';
 
 @Component({
   selector: 'app-data-form',
@@ -32,6 +31,7 @@ import { BaseFormComponent } from '../shared/base-form/base-form.component';
 export class DataFormComponent extends BaseFormComponent implements OnInit {
   // formulario!: FormGroup;
   estados: EstadoBr[] = [];
+  cidades: CidadeBR[] = [];
   // estados!: Observable<EstadoBr[]>;
   cargos: any[] = [];
   tecnologias: any[] = [];
@@ -50,6 +50,27 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
   }
 
   override ngOnInit(): void {
+    this.dropDownService.getEstadosBr().subscribe((res: any) => {
+      res.map((dados: any) => {
+        this.estados.push(dados);
+      });
+    });
+
+    this.formulario
+      .get('endereco.estado')
+      ?.valueChanges.pipe(
+        map((estado: any) =>
+          this.estados.filter((e: any) => e.sigla === estado)
+        ),
+        map((estados: any[]) =>
+          estados && estados.length > 0 ? estados[0].id : empty()
+        ),
+        switchMap((estadoId: number) =>
+          this.dropDownService.getCidades(estadoId)
+        )
+      )
+      .subscribe((cidades: any) => (this.cidades = cidades));
+
     // this.verificaEmailService
     //   .verificarEmail('email@email.com')
     //   .subscribe((data: any) => console.log(data));
@@ -93,12 +114,6 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
       newsLetter: ['s'],
       termos: [null, Validators.pattern('true')],
       frameworks: this.buildFrameworks(),
-    });
-
-    this.dropDownService.getEstadosBr().subscribe((res: any) => {
-      res.map((dados: any) => {
-        this.estados.push(dados);
-      });
     });
 
     this.formulario
@@ -145,10 +160,6 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
         (error: any) => alert('erro')
       );
   }
-
-  // consultaCEP() {
-  //   let cep = this.formulario.get('endereco.cep')?.value;
-  // }
 
   resetDadosForm() {
     this.formulario.patchValue({
