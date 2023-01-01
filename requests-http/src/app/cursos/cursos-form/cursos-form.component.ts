@@ -46,7 +46,11 @@ export class CursosFormComponent implements OnInit {
     // mergeMap => a ordem não importa
     // exHaustMap => casos de login
 
-    const curso = this.route.snapshot.data['curso'];
+    const curso = this.route.snapshot.data['Curso'];
+    console.log(
+      '🚀 ~ file: cursos-form.component.ts:50 ~ CursosFormComponent ~ ngOnInit ~ curso',
+      curso
+    );
 
     this.formulario = this.fb.group({
       id: [curso?.id],
@@ -75,14 +79,43 @@ export class CursosFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (this.formulario.valid) {
-      this.cursosService.create(this.formulario.value).subscribe(
+      let msgSucess = 'Curso criado com suceso.';
+      let msgError = 'Erro ao criar curso, tente novamente.';
+
+      if (this.formulario.value.id) {
+        msgSucess = 'Curso editado com suceso.';
+        msgError = 'Erro ao atualizar curso, tente novamente.';
+      }
+
+      this.cursosService.save(this.formulario.value).subscribe(
         (success: any) => {
-          this.modal.showAlertSucesso('Curso criado com suceso'),
-            this.location.back();
+          this.modal.showAlertSucesso(msgSucess), this.location.back();
         },
-        (error: any) =>
-          this.modal.showAlertDanger('Erro ao criar curso, tente novamente')
+        (error: any) => this.modal.showAlertDanger(msgError)
       );
+
+      // if (this.formulario.value.id) {
+      //   // update
+      //   this.cursosService.save(this.formulario.value).subscribe(
+      //     (success: any) => {
+      //       this.modal.showAlertSucesso('Curso editado com suceso'),
+      //         this.location.back();
+      //     },
+      //     (error: any) =>
+      //       this.modal.showAlertDanger(
+      //         'Erro ao atualizar curso, tente novamente'
+      //       )
+      //   );
+      // } else {
+      //   this.cursosService.save(this.formulario.value).subscribe(
+      //     (success: any) => {
+      //       this.modal.showAlertSucesso('Curso criado com suceso'),
+      //         this.location.back();
+      //     },
+      //     (error: any) =>
+      //       this.modal.showAlertDanger('Erro ao criar curso, tente novamente')
+      //   );
+      // }
     }
   }
 
