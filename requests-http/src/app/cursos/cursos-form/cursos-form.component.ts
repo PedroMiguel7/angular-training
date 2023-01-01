@@ -90,4 +90,8 @@ export class CursosFormComponent implements OnInit {
     this.submitted = false;
     this.formulario.reset();
   }
+
+  // haserrorNull(requerid: string) {
+  //   return this.hasError('nome')![requerid] ? true : false;
+  // }
 }
