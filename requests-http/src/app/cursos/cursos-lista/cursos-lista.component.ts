@@ -16,7 +16,7 @@ export class CursosListaComponent implements OnInit {
 
   cursos$?: Observable<Curso[]>;
   error$?: any = new Subject<Boolean>();
-  BsModalRef: BsModalRef | undefined;
+  bsModalRef!: BsModalRef;
 
   constructor(
     private service: CursosService,
@@ -37,14 +37,12 @@ export class CursosListaComponent implements OnInit {
         return empty();
       })
     );
-
-    this.service.list().pipe(catchError((error: any) => empty()));
   }
 
   handleError() {
-    this.BsModalRef = this.modalService.show(AlertModalComponent);
-    this.BsModalRef.content.type = 'danger';
-    this.BsModalRef.content.message =
-      'Erro ao carregar cursos. Tente novamente mais tarde';
+    this.bsModalRef = this.modalService.show(AlertModalComponent);
+    this.bsModalRef.content.type = 'danger';
+    this.bsModalRef.content.message =
+      'Erro ao carregar cursos. Tente novamente mais tarde.';
   }
 }
