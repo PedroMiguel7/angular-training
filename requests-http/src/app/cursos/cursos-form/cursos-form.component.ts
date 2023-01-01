@@ -32,24 +32,26 @@ export class CursosFormComponent implements OnInit {
     //   curso$.subscribe((curso: any) => {
     //     this.updateForm(curso);
     //   });
-    // });
+    //; });
 
-    this.route.params
-      .pipe(
-        map((params: any) => params['id']),
-        switchMap((id: any) => this.cursosService.loadByID(Number(id)))
-        // switchMap(cursos => obterAulas)
-      )
-      .subscribe((curso: any) => this.updateForm(curso));
+    // this.route.params
+    //   .pipe(
+    //     map((params: any) => params['id']),
+    //     switchMap((id: any) => this.cursosService.loadByID(Number(id)))
+    //     // switchMap(cursos => obterAulas)
+    //   )
+    //   .subscribe((curso: any) => this.updateForm(curso));
 
     // concatMap => a ordem da requisição importa
     // mergeMap => a ordem não importa
     // exHaustMap => casos de login
 
+    const curso = this.route.snapshot.data['curso'];
+
     this.formulario = this.fb.group({
-      id: [null],
+      id: [curso?.id],
       nome: [
-        null,
+        curso?.nome,
         [
           Validators.required,
           Validators.minLength(3),
@@ -58,6 +60,13 @@ export class CursosFormComponent implements OnInit {
       ],
     });
   }
+
+  // updateForm(curso: any) {
+  //   this.formulario.patchValue({
+  //     id: curso.id,
+  //     nome: curso.nome,
+  //   });
+  // }
 
   hasError(field: string) {
     return this.formulario.get(field)?.errors;
@@ -80,12 +89,5 @@ export class CursosFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.formulario.reset();
-  }
-
-  updateForm(curso: any) {
-    this.formulario.patchValue({
-      id: curso.id,
-      nome: curso.nome,
-    });
   }
 }
