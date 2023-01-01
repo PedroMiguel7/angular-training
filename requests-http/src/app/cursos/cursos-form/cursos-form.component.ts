@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CursosService } from '../cursos.service';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cursos-form',
@@ -19,11 +20,21 @@ export class CursosFormComponent implements OnInit {
     private fb: FormBuilder,
     private cursosService: CursosService,
     private modal: AlertModalService,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: any) => {
+      const id = params['id'];
+      const curso$ = this.cursosService.loadByID(id);
+      curso$.subscribe((curso: any) => {
+        this.updateForm(curso);
+      });
+    });
+
     this.formulario = this.fb.group({
+      id: [null],
       nome: [
         null,
         [
@@ -56,5 +67,12 @@ export class CursosFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.formulario.reset();
+  }
+
+  updateForm(curso: any) {
+    this.formulario.patchValue({
+      id: curso.id,
+      nome: curso.nome,
+    });
   }
 }
