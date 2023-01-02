@@ -8,7 +8,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-const multipartMiddleware = multiparty({ uploadDir: "./upload" });
+const multipartMiddleware = multiparty({ uploadDir: "./uploads" });
 
 app.post("/upload", multipartMiddleware, (req, res) => {
   const files = req.files;
