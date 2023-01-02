@@ -44,4 +44,23 @@ export class UploadFileComponent implements OnInit {
       // });
     }
   }
+
+  onDownloadExc() {
+    this.service
+      .download('http://localhost:8000/downloadExcel')
+      .subscribe((response: any) => {
+        const file = new Blob([response], { type: response.type });
+
+        const blob = window.URL.createObjectURL(file);
+
+        const link = document.createElement('a');
+        link.href = blob;
+        link.download = 'report2.pdf';
+
+        window.URL.revokeObjectURL(blob);
+        link.remove();
+      });
+  }
+
+  onDownloadPDF() {}
 }

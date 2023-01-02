@@ -7,6 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 const multipartMiddleware = multiparty({ uploadDir: "./uploads" });
 
@@ -16,6 +17,15 @@ app.post("/upload", multipartMiddleware, (req, res) => {
   res.json({ message: files });
 });
 
-app.use((err, req, res, next) => res.json({ error: err.message }));
+app.get("/downloadExcel", (req, res) => {
+  var file = __dirname + "./uploads/report2.xlsx";
+  res.download(file);
+});
+
+app.get("/downloadPDF", (req, res) => {
+  res.send("./uploads/report2.pdf");
+});
+
+app.use((err, req, res, next) => res.json({ error: err?.message }));
 
 app.listen(8000);
