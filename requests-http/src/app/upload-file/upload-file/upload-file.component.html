@@ -1,4 +1,10 @@
 <div class="mb-3" style="margin-top: 20px">
-  <label for="formFile" class="form-label">Selecionar arquivo</label>
-  <input class="form-control" type="file" id="formFile" />
+  <label for="formFileMultiple" class="form-label">Selecionar arquivo</label>
+  <input
+    class="form-control"
+    type="file"
+    id="formFileMultiple"
+    (change)="onChange($event)"
+    multiple
+  />
 </div>
