@@ -49,18 +49,15 @@ export class UploadFileComponent implements OnInit {
     this.service
       .download('http://localhost:8000/downloadExcel')
       .subscribe((response: any) => {
-        const file = new Blob([response], { type: response.type });
-
-        const blob = window.URL.createObjectURL(file);
-
-        const link = document.createElement('a');
-        link.href = blob;
-        link.download = 'report2.pdf';
-
-        window.URL.revokeObjectURL(blob);
-        link.remove();
+        this.service.handleFiel(response, 'report2.xlsx');
       });
   }
 
-  onDownloadPDF() {}
+  onDownloadPDF() {
+    this.service
+      .download('http://localhost:8000/downloadPDF')
+      .subscribe((response: any) => {
+        this.service.handleFiel(response, 'report2.pdf');
+      });
+  }
 }

@@ -23,7 +23,8 @@ app.get("/downloadExcel", (req, res) => {
 });
 
 app.get("/downloadPDF", (req, res) => {
-  res.send("./uploads/report2.pdf");
+  var file = __dirname + "./uploads/report2.pdf";
+  res.download(file);
 });
 
 app.use((err, req, res, next) => res.json({ error: err?.message }));

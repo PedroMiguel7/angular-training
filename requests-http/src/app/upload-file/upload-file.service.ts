@@ -5,7 +5,7 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UploadFileService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private service: UploadFileService) {}
 
   upload(files: Set<any>, url: string) {
     const formData = new FormData();
@@ -22,5 +22,33 @@ export class UploadFileService {
 
   download(url: string) {
     return this.http.get(url, { responseType: 'blob' as 'json' });
+  }
+
+  handleFiel(res: any, fileName: string) {
+    this.service
+      .download('http://localhost:8000/downloadExcel')
+      .subscribe((response: any) => {
+        const file = new Blob([response], { type: response.type });
+
+        const blob = window.URL.createObjectURL(file);
+
+        const link = document.createElement('a');
+        link.href = blob;
+        link.download = fileName;
+
+        // link.click();
+        link.dispatchEvent(
+          new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+          })
+        );
+
+        setTimeout(() => {
+          window.URL.revokeObjectURL(blob);
+          link.remove();
+        }, 100);
+      });
   }
 }
