@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { tap, map } from 'rxjs';
+import {
+  tap,
+  map,
+  filter,
+  distinctUntilChanged,
+  debounceTime,
+  switchMap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-lib-search',
@@ -17,7 +24,23 @@ export class LibSearchComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.results$ = this.queryField.valueChanges.pipe(
+      map((value: any) => value.trim()),
+      filter((value: any) => value.length > 1),
+      debounceTime(200),
+      distinctUntilChanged(),
+      switchMap((value: any) =>
+        this.http.get(this.SEARCH_URL, {
+          params: { search: value, fields: this.FIELDS },
+        })
+      ),
+      tap((res: any) => (this.total = res.total)),
+      map((res: any) => {
+        return res.results;
+      })
+    );
+  }
 
   onSearch() {
     let value = this.queryField.value;
@@ -28,15 +51,21 @@ export class LibSearchComponent implements OnInit {
       params = params.set('serach', value);
       params = params.set('fields', this.FIELDS);
 
-      this.results$ = this.http
-        .get(this.SEARCH_URL, { params })
-        .pipe(
-          tap((res: any) => {
-            (this.total = res.total), console.log(res);
-          }),
-          map((res: any) => res.results)
-        )
-        .subscribe();
+      this.results$ = this.queryField.valueChanges.pipe(
+        map((value: any) => value.trim()),
+        filter((value: any) => value.length > 1),
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap((value: any) =>
+          this.http.get(this.SEARCH_URL, {
+            params: { search: value, fields: this.FIELDS },
+          })
+        ),
+        tap((res: any) => (this.total = res.total)),
+        map((res: any) => {
+          return res.results;
+        })
+      );
     }
   }
 }
