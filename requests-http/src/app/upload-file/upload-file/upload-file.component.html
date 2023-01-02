@@ -8,3 +8,12 @@
     multiple
   />
 </div>
+<button
+  type="button"
+  class="btn btn-primary"
+  style="margin-top: 20px"
+  (click)="onUpload()"
+  [disabled]="!files"
+>
+  Upload
+</button>
