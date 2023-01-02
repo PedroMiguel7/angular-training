@@ -55,5 +55,7 @@ export class AlertModalService {
     if (dismisTimeout) {
       setTimeout(() => bsModalRef.hide(), dismisTimeout);
     }
+
+    return (<ConfirmModalComponent>bsModalRef.content).confirmResult;
   }
 }

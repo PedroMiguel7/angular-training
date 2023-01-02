@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-confirm-modal',
@@ -12,13 +13,24 @@ export class ConfirmModalComponent implements OnInit {
   @Input() cancelTxt: string = 'Cancelar';
   @Input() okTxt: string = 'Sim';
 
+  confirmResult!: Subject<boolean>;
+
   constructor(public bsModalRef: BsModalRef) {}
 
-  ngOnInit(): void {}
-
-  onClose() {
-    this.bsModalRef.hide();
+  ngOnInit(): void {
+    this.confirmResult = new Subject();
   }
 
-  onConfirm() {}
+  onConfirm() {
+    this.confirmAndClose(true);
+  }
+
+  onClose() {
+    this.confirmAndClose(false);
+  }
+
+  private confirmAndClose(value: boolean) {
+    this.confirmResult.next(value);
+    this.bsModalRef.hide();
+  }
 }
