@@ -1,6 +1,6 @@
 # angular-training
 
-Curso angular da Loaine
+Curso angular da Loiane
 
 Angular é um framework que permite desenvolver aplicações web e mobile, mantido pela Google. Apesar de ser a segunda versão do framework, Angular não é a continuação do Angular v1 (AngularJS) com melhores e novas funcionalidades, foi reescrito.
 
